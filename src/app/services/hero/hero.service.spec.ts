@@ -11,8 +11,8 @@ import { TokenService } from '../token/token.service';
 
 const mockHeroesUrl = 'api/heroes';
 
-fdescribe('HeroService', () => {
-  let service: HeroService;
+describe('HeroService', () => {
+  let heroService: HeroService;
   let messagesServiceSpy: jasmine.SpyObj<MessagesService>;
   let httpController: HttpTestingController;
   let tokenService: TokenService;
@@ -31,7 +31,7 @@ fdescribe('HeroService', () => {
       ],
     });
 
-    service = TestBed.inject(HeroService);
+    heroService = TestBed.inject(HeroService);
     messagesServiceSpy = TestBed.inject(MessagesService) as jasmine.SpyObj<MessagesService>;
     httpController = TestBed.inject(HttpTestingController);
     tokenService = TestBed.inject(TokenService);
@@ -42,7 +42,7 @@ fdescribe('HeroService', () => {
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(heroService).toBeTruthy();
   });
 
   // getHeroes
@@ -51,7 +51,7 @@ fdescribe('HeroService', () => {
 
     spyOn(tokenService, 'getToken').and.returnValue('123');
 
-    service.getHeroes().subscribe((heroes) => {
+    heroService.getHeroes().subscribe((heroes) => {
       expect(heroes).toEqual(expectedHeroes);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -72,7 +72,7 @@ fdescribe('HeroService', () => {
 
     const spy = spyOn(console, 'error');
 
-    service.getHeroes().subscribe({
+    heroService.getHeroes().subscribe({
       next: (heroes) => {
         expect(heroes).toEqual([]);
         doneFn();
@@ -95,7 +95,7 @@ fdescribe('HeroService', () => {
   it('getHero: should return expected hero', (doneFn: DoneFn) => {
     const expectedHero = generateOneHero();
 
-    service.getHero(expectedHero.id).subscribe((hero) => {
+    heroService.getHero(expectedHero.id).subscribe((hero) => {
       expect(hero).toEqual(expectedHero);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -112,7 +112,7 @@ fdescribe('HeroService', () => {
   it('addHero: should return a new product', (doneFn: DoneFn) => {
     const newHero = {name: 'new hero'} as Hero;
 
-    service.addHero(newHero).subscribe((hero) => {
+    heroService.addHero(newHero).subscribe((hero) => {
       expect(hero).toEqual(newHero);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -129,7 +129,7 @@ fdescribe('HeroService', () => {
   it('updateHero: should return updated hero', (doneFn: DoneFn) => {
     const updatedHero = generateOneHero();
 
-    service.updateHero(updatedHero).subscribe((hero) => {
+    heroService.updateHero(updatedHero).subscribe((hero) => {
       expect(hero).toEqual(updatedHero);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -146,7 +146,7 @@ fdescribe('HeroService', () => {
   it('deleteHero: should return deleted hero', (doneFn: DoneFn) => {
     const deletedHero = generateOneHero();
 
-    service.deleteHero(deletedHero.id).subscribe((hero) => {
+    heroService.deleteHero(deletedHero.id).subscribe((hero) => {
       expect(hero).toEqual(deletedHero);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -163,7 +163,7 @@ fdescribe('HeroService', () => {
     const searchTerm = 'search term';
     const expectedHeroes = generateManyHeroes(5);
 
-    service.searchHeroes(searchTerm).subscribe((heroes) => {
+    heroService.searchHeroes(searchTerm).subscribe((heroes) => {
       expect(heroes).toEqual(expectedHeroes);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -179,7 +179,7 @@ fdescribe('HeroService', () => {
     const searchTerm = 'search term';
     const expectedHeroes: Hero[] = []
 
-    service.searchHeroes(searchTerm).subscribe((heroes) => {
+    heroService.searchHeroes(searchTerm).subscribe((heroes) => {
       expect(heroes).toEqual(expectedHeroes);
       expect(messagesServiceSpy.add).toHaveBeenCalledTimes(1);
       doneFn();
@@ -195,7 +195,7 @@ fdescribe('HeroService', () => {
     const searchTerm = '';
     const expectedHeroes: Hero[] = [];
 
-    service.searchHeroes(searchTerm).subscribe((heroes) => {
+    heroService.searchHeroes(searchTerm).subscribe((heroes) => {
       expect(heroes).toEqual(expectedHeroes);
       expect(messagesServiceSpy.add).not.toHaveBeenCalled();
       doneFn();
