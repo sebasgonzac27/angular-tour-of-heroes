@@ -1,6 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { HeroesComponent } from './components/heroes/heroes.component';
+import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeroSearchComponent } from './components/hero-search/hero-search.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +14,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        MessagesComponent,
       ],
     }).compileComponents();
   });
@@ -20,16 +26,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-tour-of-heroes'`, () => {
+  it(`should have as title 'tour of heroes'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-tour-of-heroes');
+    expect(app.title).toMatch(/tour of heroes/i);
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-tour-of-heroes app is running!');
+    expect(compiled.querySelector('.title')?.textContent).toMatch(/tour of heroes/i);
   });
 });

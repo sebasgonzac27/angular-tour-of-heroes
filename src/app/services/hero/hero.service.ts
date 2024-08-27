@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HEROES } from './mock-heroes';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { Hero } from './hero';
-import { MessagesService } from './messages.service';
+import { Hero } from '../../models/hero';
+import { MessagesService } from '../messages/messages.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class HeroService {
   private heroesUrl = 'api/heroes';
-  httpOptions = {
+  private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
@@ -76,7 +75,7 @@ export class HeroService {
     this.messagesService.add(`HeroService: ${message}`);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation: string, result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
