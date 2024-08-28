@@ -7,11 +7,11 @@ export class ActivatedRouteStub {
   readonly paramMap = this.subject.asObservable();
   readonly queryParamMap = this.subjectQuery.asObservable();
 
-  setParamMap(params: Params = {}) {
+  setParamMap(params: Params) {
     this.subject.next(convertToParamMap(params));
   }
 
-  setQueryParamMap(params: Params = {}) {
+  setQueryParamMap(params: Params) {
     this.subjectQuery.next(convertToParamMap(params));
   }
 }

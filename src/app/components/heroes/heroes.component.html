@@ -10,11 +10,11 @@
 </ul>
 
 <div>
-  <label for="new-hero">Hero name: </label>
-  <input id="new-hero" #heroName />
+    <label for="new-hero">Hero name: </label>
+    <input id="new-hero" [(ngModel)]="newHero" />
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" class="add-button" (click)="add(heroName.value); heroName.value=''">
+  <button type="button" class="add-button" (click)="add()">
     Add hero
   </button>
 </div>

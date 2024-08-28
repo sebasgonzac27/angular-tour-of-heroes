@@ -8,6 +8,7 @@ import { ActivatedRouteStub } from 'src/testing/activated-route-stub';
 import { of } from 'rxjs';
 import { generateOneHero } from 'src/app/models/hero.mock';
 import { FormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
 
 
 describe('HeroDetailComponent', () => {
@@ -40,7 +41,8 @@ describe('HeroDetailComponent', () => {
     location = TestBed.inject(Location) as jasmine.SpyObj<Location>;
   });
 
-  it('should create', () => {
+  // getHero
+  it('getHero: should get hero at created', () => {
     const productId = 1;
 
     const hero = {
@@ -55,4 +57,26 @@ describe('HeroDetailComponent', () => {
 
     expect(component).toBeTruthy();
   });
+
+  // save
+  it('save: should save changes on hero', () => {
+    const mockHero = generateOneHero();
+    component.hero = mockHero;
+    heroService.updateHero.and.returnValue(of(''));
+
+    component.save();
+
+    expect(heroService.updateHero).toHaveBeenCalledWith(mockHero);
+    expect(location.back).toHaveBeenCalled();
+  });
+
+  it('save: should not save changes on hero if hero is undefined', () => {
+    component.hero = undefined;
+
+    component.save();
+
+    expect(heroService.updateHero).not.toHaveBeenCalled();
+    expect(location.back).not.toHaveBeenCalled();
+  });
+
 });
