@@ -13,6 +13,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data/in-memory-data.service';
 import { HeroSearchComponent } from './components/hero-search/hero-search.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { PersonComponent } from './components/person/person.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
+    PersonComponent,
   ],
   imports: [
     BrowserModule,
